@@ -8,17 +8,20 @@ normalize a =
 
 tobin :: Integer->String
 tobin decimal = 
-   if decimal > 0 then
-    show 0 ++ (getAbsBin decimal) 
+   if (abs (decimal)) <= 32767 then
+      if decimal > 0 then
+    show 0 ++ (complete16bit (getAbsBin decimal)) 
    else
     if decimal < 0 then
-      show 1 ++ (getAbsBin decimal)
+      show 1 ++ (complete16bit (getAbsBin (abs (decimal))))
     else 
-      (show 0) 
+      (show 0)
+   else
+      "Error, only numbers between (-32768,32768)"
 
 complete16bit :: String->String
 complete16bit binarydig = 
-   if (length (binarydig)) < 16 then 
+   if (length (binarydig)) < 15 then 
       (complete16bit (show 0 ++ binarydig)) 
    else 
       binarydig
