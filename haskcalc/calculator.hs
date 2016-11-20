@@ -10,7 +10,9 @@ pow n p =
          n * (pow n (p-1))
 
 --TODO: Trigonometric functions ( :v I'll do diz 2)
+sinus :: 
 
+sinrec ::
 
 --Subtracts pi/2 the necessary times to get a value minor or equals to pi/2 :v
 normalize :: Float->Float
@@ -18,16 +20,15 @@ normalize a = a - (fromIntegral (truncate (a / (3.141592653589793238462643383279
 
 
 --CONCERNING TO BINARY MANIPULATION
-
 --Converts a decimal digit between (-32768,32768) to binary
 tobin :: Integer->String
 tobin dec = 
    if (abs (dec)) <= 32767 then
       if dec > 0 then
-      (complete16bit (getAbsBin dec)) 
+      (complete16bit (absbin dec)) 
    else
     if dec < 0 then
-      (twoComplement 0 ((complete16bit (getAbsBin (abs (dec))))) "" 0 )
+      (twoComplement 0 ((complete16bit (absbin (abs (dec))))) "" 0 )
     else 
       (show 0)
    else
@@ -61,13 +62,14 @@ complete16bit bnd =
       (complete16bit (show 0 ++ bnd)) 
    else 
       bnd
+
 --Gets the binary absolute value
-getAbsBin :: Integer->String
-getAbsBin decimal = 
+absbin :: Integer->String
+absbin decimal = 
    if decimal < 2 then 
       (show decimal) 
    else 
-      (getAbsBin (toInteger (truncate ((fromIntegral(decimal))/2)))) ++ show (mod decimal 2)
+      (absbin (toInteger (truncate ((fromIntegral(decimal))/2)))) ++ show (mod decimal 2)
 
 suma :: Float->Float->Float
 suma a b = a + b
