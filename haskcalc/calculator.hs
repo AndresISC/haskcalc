@@ -2,7 +2,7 @@ module Main where
 sq :: Float->Float
 sq c = c * c
 
---Subtracts pi/2 the necessary 
+--Subtracts pi/2 the necessary times to get a value minor or equals to pi/2 :v
 normalize :: Float->Float
 normalize a = 
    a - (fromIntegral (truncate (a / (3.1415926535897932384626433832795/2)))*(3.1415926535897932384626433832795/2))
