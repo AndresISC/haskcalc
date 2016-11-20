@@ -2,50 +2,53 @@ module Main where
 sq :: Float->Float
 sq c = c * c
 
+--Subtracts pi/2 the necessary 
 normalize :: Float->Float
 normalize a = 
    a - (fromIntegral (truncate (a / (3.1415926535897932384626433832795/2)))*(3.1415926535897932384626433832795/2))
 
+--Converts a decimal digit between (-32768,32768) to binary
 tobin :: Integer->String
-tobin decimal = 
-   if (abs (decimal)) <= 32767 then
-      if decimal > 0 then
-      (complete16bit (getAbsBin decimal)) 
+tobin dec = 
+   if (abs (dec)) <= 32767 then
+      if dec > 0 then
+      (complete16bit (getAbsBin dec)) 
    else
-    if decimal < 0 then
-      (twoComplement 0 ((complete16bit (getAbsBin (abs (decimal))))) "" 0 )
+    if dec < 0 then
+      (twoComplement 0 ((complete16bit (getAbsBin (abs (dec))))) "" 0 )
     else 
       (show 0)
    else
-      "Error, only numbers between (-32768,32768)"
+      "Error, only numbers between (-32767,32767)"
 
+--Finds the negative number of a binary positive representing it in two's complement.
 twoComplement :: Integer->String->String->Integer->String
-twoComplement lectura binaryString complement flag = 
-   if ((length (binaryString)-fromIntegral(lectura)) == 0 ) then --Iguales
+twoComplement pointer binString t2c flag = 
+   if ((length (binString)-fromIntegral(pointer)) == 0 ) then --Iguales
       complement
    else
       if flag == 0 then
       (
-      if (binaryString !! ((length (binaryString)-1)-(fromIntegral(lectura)))) == '0' then
-         (twoComplement (lectura+1) binaryString complement 0 )++"0"
+      if (binString !! ((length (binString)-1)-(fromIntegral(pointer)))) == '0' then
+         (twoComplement (pointer+1) binString t2c 0 )++"0"
       else
-         (twoComplement (lectura+1) binaryString complement 1 )++"1"
+         (twoComplement (pointer+1) binString t2c 1 )++"1"
       )
       else
       (
-      if (binaryString !! ((length (binaryString)-1)-(fromIntegral(lectura)))) == '1' then
-         (twoComplement (lectura+1) binaryString complement 1 )++"0"
+      if (binString !! ((length (binString)-1)-(fromIntegral(pointer)))) == '1' then
+         (twoComplement (pointer+1) binString t2c 1 )++"0"
       else
-         (twoComplement (lectura+1) binaryString complement 1 )++"1"
+         (twoComplement (pointer+1) binString t2c 1 )++"1"
       )
 
-
+--Completes a binary digit of a length minor to 16 digits putting zeros in the lacking digits.
 complete16bit :: String->String
-complete16bit binarydig = 
-   if (length (binarydig)) < 16 then 
-      (complete16bit (show 0 ++ binarydig)) 
+complete16bit bnd = 
+   if (length (bnd)) < 16 then 
+      (complete16bit (show 0 ++ bnd)) 
    else 
-      binarydig
+      bnd
 
 getAbsBin :: Integer->String
 getAbsBin decimal = 
@@ -53,9 +56,6 @@ getAbsBin decimal =
       (show decimal) 
    else 
       (getAbsBin (toInteger (truncate ((fromIntegral(decimal))/2)))) ++ show (mod decimal 2)
-
-compbin :: String->String
-compbin cadena = if (length cadena) < 16 then (compbin (show 0 ++ cadena)) else cadena
 
 --TODO: To decimal from binary (I'll do this)
 --Trigonometric functions ( :v I'll do diz 2)
