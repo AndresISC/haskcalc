@@ -10,18 +10,39 @@ tobin :: Integer->String
 tobin decimal = 
    if (abs (decimal)) <= 32767 then
       if decimal > 0 then
-    show 0 ++ (complete16bit (getAbsBin decimal)) 
+      (complete16bit (getAbsBin decimal)) 
    else
     if decimal < 0 then
-      show 1 ++ (complete16bit (getAbsBin (abs (decimal))))
+      (twoComplement 0 ((complete16bit (getAbsBin (abs (decimal))))) "" 0 )
     else 
       (show 0)
    else
       "Error, only numbers between (-32768,32768)"
 
+twoComplement :: Integer->String->String->Integer->String
+twoComplement lectura binaryString complement flag = 
+   if ((length (binaryString)-fromIntegral(lectura)) == 0 ) then --Iguales
+      complement
+   else
+      if flag == 0 then
+      (
+      if (binaryString !! ((length (binaryString)-1)-(fromIntegral(lectura)))) == '0' then
+         (twoComplement (lectura+1) binaryString complement 0 )++"0"
+      else
+         (twoComplement (lectura+1) binaryString complement 1 )++"1"
+      )
+      else
+      (
+      if (binaryString !! ((length (binaryString)-1)-(fromIntegral(lectura)))) == '1' then
+         (twoComplement (lectura+1) binaryString complement 1 )++"0"
+      else
+         (twoComplement (lectura+1) binaryString complement 1 )++"1"
+      )
+
+
 complete16bit :: String->String
 complete16bit binarydig = 
-   if (length (binarydig)) < 15 then 
+   if (length (binarydig)) < 16 then 
       (complete16bit (show 0 ++ binarydig)) 
    else 
       binarydig
