@@ -1,6 +1,6 @@
 module Main where
 
-import BinUtils
+import           BinUtils
 
 sq :: Float->Float
 sq c = c * c
