@@ -1,5 +1,4 @@
 module Main where
-<<<<<<< HEAD
 --Returns n to power p
 pow :: Double->Integer->Double
 pow n p = 
@@ -31,63 +30,56 @@ sinusr k x result =
   if k == 130 then
    ( ((pow (-1) k ) * ((pow x ((2*k)+1))) / (fromIntegral (f ((2*k)+1)))))
   else
-   result + (sinusr (k+1) x ( ((pow (-1) k ) * ((pow x ((2*k)+1))) / (fromIntegral (f ((2*k)+1))))))
+   result + (sinusr (k+1) x (((pow (-1) k )*((pow x ((2*k)+1)))/(fromIntegral (f ((2*k)+1))))))
 
---Returns the sinus of the entering value, with 'd' to indicate degrees, and everything else to make it work with radians
-sinus :: Double->Char->Double
-sinus n deg = 
+--Returns the "sin" of the entering value, with 'd' to indicate degrees, and everything else to make it work with radians
+msen :: Double->Char->Double
+msen n deg = 
    if(deg == 'd')then
       sinusr 0 (normalize (torad n)) 0 
    else
       sinusr 0 (normalize n) 0 
 
---Returns the sinus of the entering value, with 'd' to indicate degrees, and everything else to make it work with radians
-sinus :: Double->Char->Double
-sinus n deg = 
-   if(deg == 'd')then
-      sinusr 0 (normalize (torad n)) 0 
-   else
-      sinusr 0 (normalize n) 0 
+--Returns the "cos" of the entering value, with 'd' to indicate degrees, and everything else to make it work with radians
+mcos :: Double->Char->Double
+mcos n deg = 
+   msen  ((pi/2)-n) deg
 
+--Returns the "tan" of the entering value, with 'd' to indicate degrees, and everything else to make it work with radians
+mtan :: Double->Char->Double
+mtan n deg = 
+   (msen  n deg)/(mcos  n deg)
+
+--Returns the "cot" of the entering value, with 'd' to indicate degrees, and everything else to make it work with radians
+mcot :: Double->Char->Double
+mcot n deg = 
+   1 / (mtan  n deg)
+
+--Returns the "sec" of the entering value, with 'd' to indicate degrees, and everything else to make it work with radians
+msec :: Double->Char->Double
+msec n deg = 
+   1 / (mcos  n deg)
+
+--Returns the "sec" of the entering value, with 'd' to indicate degrees, and everything else to make it work with radians
+mcsc :: Double->Char->Double
+mcsc n deg = 
+   1 / (msen  n deg)
 
 --Subtracts pi/2 the necessary times to get a value minor or equals to pi/2 :v
 normalize :: Double->Double
 normalize a = a - (fromIntegral (truncate (a / (pi*2)))*(pi*2))
-=======
-
-import           BinUtils
-
-sq :: Float->Float
-sq c = c * c
-
-normalize :: Float->Float
-normalize a =
-   a - (fromIntegral (truncate (a / (3.1415926535897932384626433832795/2)))*(3.1415926535897932384626433832795/2))
->>>>>>> 36d89f5cd636d9a52f2c1535518775aa79197232
-
 
 --CONCERNING TO BINARY MANIPULATION
 --Converts a decimal digit between (-32768,32768) to binary
 tobin :: Integer->String
-<<<<<<< HEAD
-tobin dec = 
+tobin dec =
    if (abs (dec)) <= 32767 then
       if dec > 0 then
-      (complete16bit (absbin dec)) 
+    show 0 ++ (complete16bit (getAbsBin dec))
    else
     if dec < 0 then
-      (twoComplement 0 ((complete16bit (absbin (abs (dec))))) "" 0 )
-    else 
-=======
-tobin decimal =
-   if (abs (decimal)) <= 32767 then
-      if decimal > 0 then
-    show 0 ++ (complete16bit (getAbsBin decimal))
-   else
-    if decimal < 0 then
-      show 1 ++ (complete16bit (getAbsBin (abs (decimal))))
+      show 1 ++ (complete16bit (getAbsBin (abs (dec))))
     else
->>>>>>> 36d89f5cd636d9a52f2c1535518775aa79197232
       (show 0)
    else
       "Error, only numbers between (-32767,32767)"
@@ -113,15 +105,6 @@ twoComplement pointer binString t2c flag =
          (twoComplement (pointer+1) binString t2c 1 )++"1"
       )
 
---Completes a binary digit of a length minor to 16 digits putting zeros in the lacking digits.
-complete16bit :: String->String
-<<<<<<< HEAD
-complete16bit bnd = 
-   if (length (bnd)) < 16 then 
-      (complete16bit (show 0 ++ bnd)) 
-   else 
-      bnd
-
 --Gets the binary absolute value
 absbin :: Integer->String
 absbin decimal = 
@@ -129,7 +112,6 @@ absbin decimal =
       (show decimal) 
    else 
       (absbin (toInteger (truncate ((fromIntegral(decimal))/2)))) ++ show (mod decimal 2)
-=======
 complete16bit binarydig =
    if (length (binarydig)) < 15 then
       (complete16bit (show 0 ++ binarydig))
@@ -147,9 +129,6 @@ compbin :: String->String
 compbin cadena = if (length cadena) < 16 then (compbin (show 0 ++ cadena)) else cadena
 
 --TODO: To decimal from binary (I'll do this)
---Trigonometric functions ( :v I'll do diz 2)
->>>>>>> 36d89f5cd636d9a52f2c1535518775aa79197232
-
 suma :: Float->Float->Float
 suma a b = a + b
 
