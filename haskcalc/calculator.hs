@@ -1,5 +1,6 @@
 module Main where
-pow :: Float->Integer->Float
+--Returns n to power p
+pow :: Double->Integer->Double
 pow n p = 
    if p == 0 then 
       1
@@ -9,14 +10,40 @@ pow n p =
       else
          n * (pow n (p-1))
 
---TODO: Trigonometric functions ( :v I'll do diz 2)
-sinus :: 
+--Finds a number's factorial
+f :: Integer->Integer
+f n =
+   if n == 1 then
+      n
+   else 
+      n * (f (n-1))
 
-sinrec ::
+--TODO: Trigonometric functions ( :v I'll do diz 2)
+
+--Get the value equivalent to radians of the presented degrees
+torad :: Double->Double
+torad v = ( (v * pi) / 180 )
+
+--Recursive to get the value of sinus of the entering radians
+sinusr :: Integer->Double->Double->Double
+sinusr k x result = 
+  if k == 130 then
+   ( ((pow (-1) k ) * ((pow x ((2*k)+1))) / (fromIntegral (f ((2*k)+1)))))
+  else
+   result + (sinusr (k+1) x ( ((pow (-1) k ) * ((pow x ((2*k)+1))) / (fromIntegral (f ((2*k)+1))))))
+
+--Returns the sinus of the entering value, with 'd' to indicate degrees, and everything else to make it work with radians
+sinus :: Double->Char->Double
+sinus n deg = 
+   if(deg == 'd')then
+      sinusr 0 (normalize (torad n)) 0 
+   else
+      sinusr 0 (normalize n) 0 
+
 
 --Subtracts pi/2 the necessary times to get a value minor or equals to pi/2 :v
-normalize :: Float->Float
-normalize a = a - (fromIntegral (truncate (a / (3.1415926535897932384626433832795/2)))*(3.1415926535897932384626433832795/2))
+normalize :: Double->Double
+normalize a = a - (fromIntegral (truncate (a / (pi*2)))*(pi*2))
 
 
 --CONCERNING TO BINARY MANIPULATION
