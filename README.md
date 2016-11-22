@@ -63,3 +63,12 @@ Este módulo define funciones para conversión de `Integer <-> [Bool]`
 
 + `binToInt` - Convierte una lista de booleanos a un número entero sin signar
 + `binToSignedInt` - Convierte una lista de booleanos a un número entero signado
+
+## Módulo `Arithmetic`
+
+Este módulo se encargará de realizar operaciones básicas de aritmética.
+
+### Funciones Accesibles
+
++ `addition` - Suma dos números (cadenas binarias sin signo)
++ `substraction` - Resta dos números (cadenas binarias sin signo)
