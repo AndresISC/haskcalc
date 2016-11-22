@@ -1,23 +1,26 @@
-module Arithmentic where
-import           BinUtils as BU
+module Arithmentic (
+  add
+) where
+  import Utils.Bitwise
+  import Utils.Strings
 
-{-|
-Converts a binary string to a boolean list
--}
-_stringToBools :: String -> [Bool]
-_stringToBools bits = [ r |  bit <- bits, let r = BU.charToBool bit]
+  {-|
+  Function that adds two binary Strings.
+  -}
+  add :: String -> String -> String
+  add a b =
+    let
+      s1 = stringToBools a
+      s2 = stringToBools b
+      r = _add s1 s2
+    in boolsToString (value r)
 
-{-|
-Converts a bool list to a binary String
--}
-_boolsToString :: [Bool] -> String
-_boolsToString bools = [ c | bool <- bools, let c = BU.boolToChar bool ]
-
-add :: String -> String -> Register
-add a b =
-  let
-    bin_a = _stringToBools a
-    bin_b = _stringToBools b
-    n = length bin_a - 1
-    r = Register [] False
-  in BU._rippleAdder bin_a bin_b n r
+    {-|
+    Function that adds two binary Strings and returns a 'Register'.
+    -}
+  _add :: [Bool] -> [Bool] -> Register
+  _add a b =
+    let
+      n = length a - 1
+      r = Register { value = [], carryFlag = False }
+    in rippleAdder a b n r
