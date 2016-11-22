@@ -1,5 +1,6 @@
 module Arithmentic (
-  add
+  addition,
+  subtraction
 ) where
   import Utils.Bitwise
   import Utils.Strings
@@ -7,11 +8,23 @@ module Arithmentic (
   {-|
   Function that adds two binary Strings.
   -}
-  add :: String -> String -> String
-  add a b =
+  addition :: String -> String -> String
+  addition a b =
     let
       s1 = stringToBools a
       s2 = stringToBools b
+      r = _add s1 s2
+    in boolsToString (value r)
+
+  {-|
+  Function that substracts a from b.
+  RESPECT THE ORDER
+  -}
+  subtraction :: String -> String -> String
+  subtraction a b =
+    let
+      s1 = stringToBools a
+      s2 = twoComplement (stringToBools b)
       r = _add s1 s2
     in boolsToString (value r)
 

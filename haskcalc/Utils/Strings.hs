@@ -1,4 +1,10 @@
-module Utils.Strings where
+module Utils.Strings
+    (
+    charToBool,
+    boolToChar,
+    stringToBools,
+    boolsToString
+    ) where
 
   {-|
   Function to convert any character into a boolean.
