@@ -1,10 +1,9 @@
-module Util.Strings
+module Utils.Strings
     (
     charToBool,
     boolToChar,
     stringToBools,
-    boolsToString,
-    binToInt
+    boolsToString
     ) where
 
   {-|
@@ -41,22 +40,3 @@ module Util.Strings
   -}
   boolsToString :: [Bool] -> String
   boolsToString bools = [ c | bool <- bools, let c = boolToChar bool ]
-
-
-  {-|
-  Converts a binary list to an Integer (unsigned)
-  -}
-  binToInt :: [Bool] -> Int
-  binToInt bools =
-    let
-      reversed = reverse bools
-      maxPow = length bools - 1
-    in _binToInt reversed maxPow
-
-  {-|
-  Converts a binary number to an Integer (unsigned)
-  -}
-  _binToInt :: [Bool] -> Int -> Int
-  _binToInt bools place
-    | place >= 0 = if bools !! place then (2^place) + _binToInt bools (place - 1) else 0 + _binToInt bools (place - 1)
-    | otherwise = 0

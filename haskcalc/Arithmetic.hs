@@ -16,10 +16,10 @@ module Arithmentic (
       r = _add s1 s2
     in boolsToString (value r)
 
-{-|
-Function that substracts a from b.
-RESPECT THE ORDER
--}
+  {-|
+  Function that substracts a from b.
+  RESPECT THE ORDER
+  -}
   subtraction :: String -> String -> String
   subtraction a b =
     let
