@@ -1,6 +1,8 @@
-module Arithmentic (
+module Arithmetic (
   addition,
-  subtraction
+  subtraction,
+  f,
+  pow
 ) where
   import Utils.Bitwise
   import Utils.Strings
@@ -38,3 +40,25 @@ module Arithmentic (
       n = length a - 1
       r = Register { value = [], carryFlag = False }
     in rippleAdder a b n r
+
+  {-|
+  Function returns n to power p
+  -}
+  pow :: Double->Integer->Double
+  pow n p = 
+     if p == 0 then 
+        1
+     else
+        if p == 1 then
+           n
+        else
+           n * (pow n (p-1))
+  {-|
+  Function that returns the factorial of a number
+  -}
+  f :: Integer->Integer
+  f n =
+     if n == 1 then
+        n
+     else 
+        n * (f (n-1))
