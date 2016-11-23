@@ -1,22 +1,63 @@
-module Conversion
+module Utils.Conversion
     (
     binToInt,
-    binToSignedInt
+    binToSignedInt,
+    intToBin,
+    signedIntToBin,
+    completeBits
     )
   where
     import Utils.Bitwise
 
+    -- TODO: Refactor this constants to be calculed with out own definitions
+    bits = 32
+    maxUnsigned = (2^bits) -1
+    minSigned = ((2^bits) / 2)
+    maxSigned = minSigned - 1
+
     {-|
     Converts a signed integer to binary
     -}
-    -- signedIntToBin :: Int -> [Bool]
-    -- signedIntToBin num =
-    --   let
-    --     absvalue = abs num
-    --     binStr = intToBin num
-    --   in if num < 0
-    --     then twoComplement binStr
-    --     else binStr
+    signedIntToBin :: Integer -> [Bool]
+    signedIntToBin num =
+      let
+        absvalue = abs num
+        binStr = intToBin absvalue
+      in if num < 0
+        then twoComplement binStr
+        else binStr
+
+
+    {-|
+    Converts integer to unsigned int
+    -}
+    intToBin :: Integer -> [Bool]
+    intToBin number
+      | number > maxUnsigned = error "Number is bigger that can be stored"
+      | number == 0 = replicate bits False
+      | otherwise = completeBits (twoDivision number [])
+
+
+    {-|
+    Handles two division for decimal to integer conversion
+    -}
+    twoDivision :: Integer -> [Bool] -> [Bool]
+    twoDivision number storage
+      | number == 0 = [False] ++ storage
+      | number == 1 = [True] ++ storage
+      | otherwise =
+        let
+          result = quotRem number 2
+          newBool = snd result == 1
+          newStorage = [newBool] ++ storage
+        in twoDivision (fst result) newStorage
+
+
+    completeBits :: [Bool] -> [Bool]
+    completeBits bools =
+      let
+        difference = bits - (length bools)
+      in if difference == 0 then bools else (replicate difference False) ++ bools
 
     {-|
     Converts a binary string to a signed integer

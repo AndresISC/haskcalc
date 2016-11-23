@@ -4,6 +4,7 @@ module Arithmentic (
 ) where
   import Utils.Bitwise
   import Utils.Strings
+  import Utils.Conversion
 
   {-|
   Function that adds two binary Strings.
