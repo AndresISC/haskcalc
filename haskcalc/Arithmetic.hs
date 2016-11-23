@@ -44,15 +44,12 @@ module Arithmetic (
   {-|
   Function returns n to power p
   -}
-  pow :: Double->Integer->Double
-  pow n p = 
-     if p == 0 then 
-        1
-     else
-        if p == 1 then
-           n
-        else
-           n * (pow n (p-1))
+  pow :: Double -> Integer -> Double
+  pow b p
+    | p == 0 = 1
+    | p == 1 = b
+    | otherwise = b * pow b (p - 1)
+
   {-|
   Function that returns the factorial of a number
   -}
@@ -60,5 +57,5 @@ module Arithmetic (
   f n =
      if n == 1 then
         n
-     else 
+     else
         n * (f (n-1))
