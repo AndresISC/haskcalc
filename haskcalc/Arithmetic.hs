@@ -1,4 +1,4 @@
-module Arithmentic (
+module Arithmetic (
   addition,
   subtraction,
   f,

@@ -7,6 +7,7 @@ module Trigonometric(
   mcsc
   )
 where
+import Arithmetic
 
 {-|
   --Get the value equivalent to radians of the presented degrees

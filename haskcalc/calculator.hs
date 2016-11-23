@@ -1,22 +1,6 @@
-module Main where
+{-module Main where 
 --Returns n to power p
-pow :: Double->Integer->Double
-pow n p = 
-   if p == 0 then 
-      1
-   else
-      if p == 1 then
-         n
-      else
-         n * (pow n (p-1))
 
---Finds a number's factorial
-f :: Integer->Integer
-f n =
-   if n == 1 then
-      n
-   else 
-      n * (f (n-1))
 
 --CONCERNING TO BINARY MANIPULATION
 --Converts a decimal digit between (-32768,32768) to binary
@@ -77,7 +61,6 @@ getAbsBin decimal =
 compbin :: String->String
 compbin cadena = if (length cadena) < 16 then (compbin (show 0 ++ cadena)) else cadena
 
---TODO: To decimal from binary (I'll do this)
 suma :: Float->Float->Float
 suma a b = a + b
 
@@ -101,3 +84,5 @@ main =  do
          print r
          print m
          print d
+-}
+
