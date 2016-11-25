@@ -8,6 +8,14 @@ module Arithmetic (
   import Utils.Strings
   import Utils.Conversion
 
+
+  addThem :: Int -> Int -> Int
+  addThem a b = let
+      n1 = signedIntToBin a
+      n2 = signedIntToBin b
+      r = _add n1 n2
+    in binToSignedInt (value r)
+
   {-|
   Function that adds two binary Strings.
   -}
@@ -44,14 +52,14 @@ module Arithmetic (
   {-|
   Function returns n to power p
   -}
-  pow :: Double -> Integer -> Double
+  pow :: Double -> Int -> Double
   pow b p
     | p < 0 = 1 / pow b (abs p)
     | p == 0 = 1
     | p == 1 = b
     | otherwise = b * pow b (p - 1)
 
-  fact :: Integer -> Integer
+  fact :: Int -> Int
   fact number
     | number < 0 = 0
     | number == 0 = 1
