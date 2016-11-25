@@ -19,7 +19,7 @@ module Utils.Conversion
     {-|
     Converts a signed integer to binary
     -}
-    signedIntToBin :: Integer -> [Bool]
+    signedIntToBin :: Int -> [Bool]
     signedIntToBin num =
       let
         absvalue = abs num
@@ -32,7 +32,7 @@ module Utils.Conversion
     {-|
     Converts integer to unsigned int
     -}
-    intToBin :: Integer -> [Bool]
+    intToBin :: Int -> [Bool]
     intToBin number
       | number > maxUnsigned = error "Number is bigger that can be stored"
       | number == 0 = replicate bits False
@@ -42,7 +42,7 @@ module Utils.Conversion
     {-|
     Handles two division for decimal to integer conversion
     -}
-    twoDivision :: Integer -> [Bool] -> [Bool]
+    twoDivision :: Int -> [Bool] -> [Bool]
     twoDivision number storage
       | number == 0 = [False] ++ storage
       | number == 1 = [True] ++ storage
