@@ -1,7 +1,7 @@
 module Arithmetic (
   addition,
   subtraction,
-  f,
+  fact,
   pow
 ) where
   import Utils.Bitwise
