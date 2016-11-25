@@ -1,5 +1,6 @@
 module Arithmetic (
   addition,
+  addThem,
   subtraction,
   fact,
   pow
