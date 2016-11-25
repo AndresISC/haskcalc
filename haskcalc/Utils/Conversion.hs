@@ -9,6 +9,7 @@ module Utils.Conversion
   where
     import Utils.Bitwise
 
+
     -- TODO: Refactor this constants to be calculed with out own definitions
     bits = 32
     maxUnsigned = (2^bits) -1
@@ -61,6 +62,7 @@ module Utils.Conversion
 
     {-|
     Converts a binary string to a signed integer
+    TODO: Fix this sh*t
     -}
     binToSignedInt :: [Bool] -> Int
     binToSignedInt bools =

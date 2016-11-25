@@ -46,16 +46,13 @@ module Arithmetic (
   -}
   pow :: Double -> Integer -> Double
   pow b p
+    | p < 0 = 1 / pow b (abs p)
     | p == 0 = 1
     | p == 1 = b
     | otherwise = b * pow b (p - 1)
 
-  {-|
-  Function that returns the factorial of a number
-  -}
-  f :: Integer->Integer
-  f n =
-     if n == 1 then
-        n
-     else
-        n * (f (n-1))
+  fact :: Integer -> Integer
+  fact number
+    | number < 0 = 0
+    | number == 0 = 1
+    | otherwise = number * fact (number - 1)
