@@ -1,7 +1,7 @@
 module Arithmetic (
-  addition,
   addThem,
-  subtraction,
+  subtractThem,
+  multiplyThem,
   fact,
   pow
 ) where
@@ -17,16 +17,60 @@ module Arithmetic (
       r = _add n1 n2
     in binToSignedInt (value r)
 
+
   {-|
-  Function that adds two binary Strings.
+  Subtract the first argument from the second, thus yielding the next formula:
+  a - b
+  So, if b is negative, it becomes a + b.
   -}
-  addition :: String -> String -> String
-  addition a b =
+  subtractThem :: Int -> Int -> Int
+  subtractThem a b = let
+    new_a = signedIntToBin a
+    new_b = twoComplement (signedIntToBin b)
+    r = _add new_a new_b
+    in binToSignedInt (value r)
+
+{-|
+  divideThem :: Int -> Int -> Int
+  divideThem a b =
     let
-      s1 = stringToBools a
-      s2 = stringToBools b
-      r = _add s1 s2
-    in boolsToString (value r)
+      dividend = signedIntToBin a
+      divisor = signedIntToBin (abs b)
+      reg = Register { value = completeBits [], carryFlag = False }
+      result = _succesiveSubtraction dividend divisor 0
+    in if b <= 0
+      then binToSignedInt (twoComplement (value result))
+      else binToSignedInt (value result)
+-}
+
+{-|
+  TODO: Finish the shittie division
+
+  _succesiveSubtraction :: [Bool] -> [Bool] -> Int -> Register -> Register
+  _succesiveSubtraction =
+    let
+      name = expression
+      in expression
+-}
+
+  multiplyThem :: Int -> Int -> Int
+  multiplyThem a b = let
+    bools = signedIntToBin a
+    reg = Register { value=completeBits [], carryFlag = False }
+    iter = abs b
+    in let
+      result = _succesiveAddition bools iter reg
+     in if b <= 0
+       then binToSignedInt (twoComplement (value result))
+       else binToSignedInt(value result)
+
+
+  _succesiveAddition :: [Bool] -> Int -> Register -> Register
+  _succesiveAddition a n r
+    | n == 0 = r
+    | otherwise = let
+      add_res = _add a (value r)
+      in _succesiveAddition a (n-1) add_res
 
   {-|
   Function that substracts a from b.
