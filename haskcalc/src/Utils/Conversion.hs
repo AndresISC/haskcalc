@@ -13,7 +13,7 @@ module Utils.Conversion
     -- TODO: Refactor this constants to be calculed with out own definitions
     bits = 32
     maxUnsigned = (2^bits) -1
-    minSigned = ((2^bits) / 2)
+    minSigned = (2^bits) / 2
     maxSigned = minSigned - 1
 
     {-|
@@ -44,31 +44,30 @@ module Utils.Conversion
     -}
     twoDivision :: Int -> [Bool] -> [Bool]
     twoDivision number storage
-      | number == 0 = [False] ++ storage
-      | number == 1 = [True] ++ storage
+      | number == 0 = False : storage
+      | number == 1 = True : storage
       | otherwise =
         let
           result = quotRem number 2
           newBool = snd result == 1
-          newStorage = [newBool] ++ storage
+          newStorage = newBool : storage
         in twoDivision (fst result) newStorage
 
 
     completeBits :: [Bool] -> [Bool]
     completeBits bools =
       let
-        difference = bits - (length bools)
-      in if difference == 0 then bools else (replicate difference False) ++ bools
+        difference = bits - length bools
+      in if difference == 0 then bools else replicate difference False ++ bools
 
     {-|
     Converts a binary string to a signed integer
-    TODO: Fix this sh*t
     -}
     binToSignedInt :: [Bool] -> Int
     binToSignedInt bools =
       let
         size = length bools - 1
-        in if head bools && bools !! size
+        in if head bools
           then let tc = twoComplement bools
             in if tc == bools
               then binToInt bools
