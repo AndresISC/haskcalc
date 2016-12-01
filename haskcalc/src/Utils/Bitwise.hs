@@ -1,4 +1,4 @@
-module Utils.Bitwise (
+  module Utils.Bitwise (
   rippleAdder,
   twoComplement,
   TwoSome(..),
@@ -7,7 +7,7 @@ module Utils.Bitwise (
 
   data TwoSome = TwoSome { sumBit :: Bool, carryBit :: Bool }
     deriving (Show)
-  data Register = Register { value :: [Bool], carryFlag :: Bool  }
+  data Register = Register { value :: [Bool], carryFlag :: Bool }
     deriving (Show)
 
   {-|
@@ -19,7 +19,9 @@ module Utils.Bitwise (
         ab_or = a || b
     in ab_nand && ab_or
 
-
+  {-|
+  Function that returns the two complement of the current formal parameter
+  -}
   twoComplement :: [Bool] -> [Bool]
   twoComplement bools =
     let

@@ -9,7 +9,9 @@ module Arithmetic (
   import Utils.Strings
   import Utils.Conversion
 
-
+  {-|
+  Adds the first element to the second
+  -}
   addThem :: Int -> Int -> Int
   addThem a b = let
       n1 = signedIntToBin a
@@ -72,18 +74,6 @@ module Arithmetic (
       add_res = _add a (value r)
       in _succesiveAddition a (n-1) add_res
 
-  {-|
-  Function that substracts a from b.
-  RESPECT THE ORDER
-  -}
-  subtraction :: String -> String -> String
-  subtraction a b =
-    let
-      s1 = stringToBools a
-      s2 = twoComplement (stringToBools b)
-      r = _add s1 s2
-    in boolsToString (value r)
-
     {-|
     Function that adds two binary Strings and returns a 'Register'.
     -}
@@ -97,14 +87,14 @@ module Arithmetic (
   {-|
   Function returns n to power p
   -}
-  pow :: Double -> Int -> Double
+  pow :: Double -> Integer -> Double
   pow b p
     | p < 0 = 1 / pow b (abs p)
     | p == 0 = 1
     | p == 1 = b
     | otherwise = b * pow b (p - 1)
 
-  fact :: Int -> Int
+  fact :: Integer -> Integer
   fact number
     | number < 0 = 0
     | number == 0 = 1
