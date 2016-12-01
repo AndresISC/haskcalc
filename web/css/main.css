@@ -1,7 +1,7 @@
 .calculator-display {
     background-color: #cbcbcb;
     color: #000;
-    font-family: 'Nova Mono', monospace;
+    font-family: 'Fira Mono', monospace;
     font-size: 6rem;
     text-align: right;
     margin: 0;
@@ -10,25 +10,34 @@
 }
 
 .buttons {
-    min-height: 25px;
-    min-width: 30px;
+    border-radius: 2px 2px 5px 5px;
+    font-family: 'Fira Mono', monospace;
+    font-size: 2rem;
+    text-align: center;
+    border: 0;
+    width: 100%;
+}
+
+.operands {
+    background-color: #cbcbcb;
 }
 
 .actions {
     background-color: #cb6e00;
     color: black;
     text-transform: uppercase;
-    text-align: center;
-    font-size: 2rem;
-    border: 0;
-    border-radius: 2px 2px 5px 5px;
+}
+
+.specials {
+    background-color: #2196F3;
+    color: white;
+    font-size: 1.5rem;
 }
 
 .numerals {
-    font-family: 'Nova Mono', monospace;
     background-color: #E0F7FA;
-    font-size: 2rem;
-    text-align: center;
-    border: 0;
-    border-radius: 2px 2px 5px 5px;
+}
+
+.padding-buttons {
+    padding-top: 5px;
 }
