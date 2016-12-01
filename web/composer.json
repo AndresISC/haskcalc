@@ -1,5 +1,7 @@
 {
-	"require":{
-		"twig/twig":"*"
-	}
+  "require": {
+    "twig/twig": "*",
+    "bower-asset/intercooler-js": "1.0.3",
+    "twbs/bootstrap": "3.3.7"
+  }
 }

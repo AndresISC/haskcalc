@@ -1,0 +1,30 @@
+{% extends 'base.twig' %}
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-lg-6 col-lg-offset-3">
+                {# Display #}
+                <div class="row">
+                    <div class="col-sm-12 calculator-display">
+                        <span id="calcDisplay">1234567890E123</span>
+                    </div>
+                </div>
+
+                {# Buttons #}
+                <div class="row" id="keys">
+                    <div class="col-sm-2 col-sm-offset-1 buttons numerals" data-value="7"></div>
+                    <div class="col-sm-2 buttons numerals" data-value="8"></div>
+                    <div class="col-sm-2 buttons numerals" data-value="9"></div>
+                    <div class="col-sm-2 buttons actions" data-action="delete" data-text="DEL"></div>
+                    <div class="col-sm-2 buttons actions" data-action="all_clear" data-text="AC"></div>
+                    <div class="col-sm-2 col-sm-offset-1 buttons numerals" data-value="4"></div>
+                    <div class="col-sm-2 buttons numerals" data-value="5"></div>
+                    <div class="col-sm-2 buttons numerals" data-value="6"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
