@@ -36,7 +36,9 @@ module Utils.Conversion
     intToBin number
       | number > maxUnsigned = error "Number is bigger that can be stored"
       | number == 0 = replicate bits False
-      | otherwise = completeBits (twoDivision number [])
+      | otherwise = 
+        let n = abs number in
+        completeBits (twoDivision n [])
 
 
     {-|
