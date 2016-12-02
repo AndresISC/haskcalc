@@ -16,8 +16,10 @@ class HaskellCalc
         // Maybe it's trigonometric
         if (sizeof($parsed) == 1) {
             $parsed = Parser::parseTrigonometric($parsed[0]);
-            return HaskellCalc::trigEval($parsed, $args['mode']);
+            return self::trigEval($parsed, $args['mode']);
         }
+        // Else, it can be a normal operation
+        return self::_normalEval($parsed[1], $parsed[0], $parsed[2]);
     }
 
     private static function trigEval($parsed, $mode)
@@ -46,9 +48,37 @@ class HaskellCalc
         return "ERROR";
     }
 
-    public function addThem($n1, $n2)
+    private static function _normalEval($operation, $n1, $n2)
     {
-        return self::_eval('addThem', sprintf('%d %D', $n1, $n2));
+        switch ($operation) {
+            case "+":
+                return self::addThem($n1, $n2);
+            case "-":
+                return self::subtractThem($n1, $n2);
+            case "x":
+                return self::multiplyThem($n1, $n2);
+            case "/":
+                break;
+            case "^":
+                break;
+            case "!":
+                break;
+        }
+    }
+
+    public static function addThem($n1, $n2)
+    {
+        return self::_eval('addThem', sprintf('%d %d', $n1, $n2));
+    }
+
+    public static function subtractThem($n1, $n2)
+    {
+        return self::_eval('subtractThem', sprintf('%d %d', $n1, $n2));
+    }
+
+    private static function multiplyThem($n1, $n2)
+    {
+        return self::_eval('multiplyThem', sprintf('%d %d', $n1, $n2));
     }
 
     public static function cos($value, $mode)

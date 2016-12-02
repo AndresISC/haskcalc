@@ -6,12 +6,15 @@ var defOut;
 
 $(document).ready(function () {
     initCalculator();
+    display.bind("DOMSubtreeModified",function(){
+        actualValue = display.html();
+    });
 });
 
 var initCalculator = function () {
     display = $('#calcDisplay');
     defOut = $('#output');
-    operandsRegex = new RegExp(/(\+)|(-)|(\/)|(x)/);
+    operandsRegex = new RegExp(/(\+)|(-)|(\/)|(x)|(!)/);
     specialsRegex = new RegExp(/(sin)|(cos)|(tan)|(sec)|(csc)|(ctg)/);
     var numerals = $('.numerals');
     var actions = $('.actions');
@@ -51,6 +54,10 @@ var adjustDisplay = function () {
 
 var numeralClick = function () {
     var char = $(this).data("value").toString();
+
+    // No fact
+    if (actualValue.includes("!"))
+        return;
 
     if (char != ".") {
         if (actualValue == "0")
@@ -106,6 +113,10 @@ var specialClick = function () {
         console.debug("Calling api...");
         return;
     }
-    actualValue = display == "^" ? actualValue + display : display;
+
+    if (actualValue.includes(display))
+        return;
+
+    actualValue = display == "^" || display == "!" ? actualValue + display : display;
     adjustDisplay();
 };
