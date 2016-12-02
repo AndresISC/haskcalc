@@ -11,7 +11,6 @@ main = do
   args <- getArgs
   putStrLn (handler args)
 
-
 handler :: [String] -> String
 handler args
   | null args = "No parameters given."
@@ -23,6 +22,10 @@ handler args
     a = read (args !! 1) :: Int
     b = read (args !! 2) :: Int
     in show (subtractThem a b)
+  | head args == "multiplyThem" = let
+    a = read (args !! 1) :: Int
+    b = read (args !! 2) :: Int
+    in show (multiplyThem a b )
   |head args == "sin" = let
     n = read (args !! 1) :: Double
     m = read (args !! 2) :: Char
