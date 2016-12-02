@@ -79,6 +79,7 @@ module Arithmetic (
   -}
   divideThem :: Int -> Int -> Int
   divideThem dd dv
+   | dv == 0 = 0
    | (dd < 0) && (dv < 0) = (_succesiveSubtraction (abs dd) (abs dv) 0)
    | (dd < 0) || (dv < 0) = (_succesiveSubtraction (abs dd) (abs dv) 0) * (-1)
    | (dd > 0) || (dv > 0) = _succesiveSubtraction dd dv 0
