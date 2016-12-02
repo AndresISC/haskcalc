@@ -9,3 +9,4 @@
 define("DS", DIRECTORY_SEPARATOR);
 define("ROOT", __DIR__ . DS);
 define("TEMPLATE_DIR", ROOT . 'templates');
+define("APP_ROOT", "haskcalc");

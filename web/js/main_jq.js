@@ -1,6 +1,8 @@
-var operandsRegex = /.*(\+|-|\*|\/).*/;
+var operandsRegex;
+var specialsRegex;
 var actualValue = "0";
 var display;
+var defOut;
 
 $(document).ready(function () {
     initCalculator();
@@ -8,6 +10,9 @@ $(document).ready(function () {
 
 var initCalculator = function () {
     display = $('#calcDisplay');
+    defOut = $('#output');
+    operandsRegex = new RegExp(/(\+)|(-)|(\/)|(x)/);
+    specialsRegex = new RegExp(/(sin)|(cos)|(tan)|(sec)|(csc)|(ctg)/);
     var numerals = $('.numerals');
     var actions = $('.actions');
     var operands = $('.operands');
@@ -41,6 +46,7 @@ var initOperands = function (index) {
 
 var adjustDisplay = function () {
     display.html(actualValue);
+    $(defOut).attr('value', actualValue);
 };
 
 var numeralClick = function () {
@@ -55,7 +61,7 @@ var numeralClick = function () {
     else {
         if (actualValue != "0") {
             // If the numeral does not have
-            if (!actualValue.match(operandsRegex)) {
+            if (!operandsRegex.test(actualValue)) {
                 actualValue = actualValue.includes(".") ? actualValue : actualValue + char;
             }
             // TODO: Fix point placement
@@ -84,6 +90,11 @@ var operandsClick = function () {
     var operand = $(this);
     var action = operand.data("action");
     var text = operand.data("text");
+
+    if (operandsRegex.test(actualValue) || specialsRegex.test(actualValue)) {
+        return;
+    }
+
     actualValue = actualValue + text;
     adjustDisplay();
 };

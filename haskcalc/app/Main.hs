@@ -11,7 +11,6 @@ main = do
   args <- getArgs
   putStrLn (handler args)
 
-
 handler :: [String] -> String
 handler args
   | null args = "No parameters given."

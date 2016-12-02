@@ -4,10 +4,24 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-lg-6 col-lg-offset-3">
+
                 {# Display #}
                 <div class="row">
                     <div class="col-sm-12 calculator-display">
                         <span id="calcDisplay">1234567890E123</span>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-2 col-sm-offset-10">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <select name="modo" id="modo" class="form-control" ic-global-include="#modo">
+                                    <option value="deg">DEG</option>
+                                    <option value="rad">RAD</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -15,27 +29,34 @@
                 <div class="row">
                     <div class="row padding-buttons">
                         <div class="col-sm-2">
-                            <button class="buttons specials" data-action="sin" data-text="sin(x)" data-display="sin "></button>
+                            <button class="buttons specials" data-action="sin" data-text="sin(x)"
+                                    data-display="sin "></button>
                         </div>
                         <div class="col-sm-2">
-                            <button class="buttons specials" data-action="cos" data-text="cos(x)" data-display="cos "></button>
+                            <button class="buttons specials" data-action="cos" data-text="cos(x)"
+                                    data-display="cos "></button>
                         </div>
                         <div class="col-sm-2">
-                            <button class="buttons specials" data-action="tg" data-text="tan(x)" data-display="tan "></button>
+                            <button class="buttons specials" data-action="tg" data-text="tan(x)"
+                                    data-display="tan "></button>
                         </div>
                         <div class="col-sm-2">
-                            <button class="buttons specials" data-action="ctg" data-text="ctg(x)" data-display="ctg "></button>
+                            <button class="buttons specials" data-action="ctg" data-text="ctg(x)"
+                                    data-display="ctg "></button>
                         </div>
                         <div class="col-sm-2">
-                            <button class="buttons specials" data-action="sec" data-text="sec(x)" data-display="sec "></button>
+                            <button class="buttons specials" data-action="sec" data-text="sec(x)"
+                                    data-display="sec "></button>
                         </div>
                         <div class="col-sm-2">
-                            <button class="buttons specials" data-action="csc" data-text="csc(x)" data-display="csc "></button>
+                            <button class="buttons specials" data-action="csc" data-text="csc(x)"
+                                    data-display="csc "></button>
                         </div>
                     </div>
                     <div class="row padding-buttons">
                         <div class="col-sm-2">
-                            <button class="buttons specials" data-action="pow" data-text="x^y" data-display="^"></button>
+                            <button class="buttons specials" data-action="pow" data-text="x^y"
+                                    data-display="^"></button>
                         </div>
                         <div class="col-sm-2">
                             <button class="buttons specials" data-action="fact" data-text="x!"></button>
@@ -103,7 +124,7 @@
                         <button class="buttons operands" data-action="add" data-text="+"></button>
                     </div>
                     <div class="col-sm-2">
-                        <button class="buttons operands" data-action="subtract" data-text="/"></button>
+                        <button class="buttons operands" data-action="subtract" data-text="-"></button>
                     </div>
                 </div>
                 <div class="row padding-buttons">
@@ -117,12 +138,14 @@
                         {#
                         TODO: Implement Webservice and add Intercooler.js properties to this button
                          #}
-                        <button class="buttons equal">=</button>
+                        <input type="hidden" name="output" id="output" value="0">
+                        <button class="buttons equal" ic-post-to="/evaluation/eval" ic-target="#calcDisplay"
+                                ic-include="#output">=
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
 {% endblock %}
