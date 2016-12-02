@@ -14,6 +14,16 @@ main = do
 handler :: [String] -> String
 handler args
   | null args = "No parameters given."
+  | head args == "binToInt" = let
+    bools = read (args !! 1) :: [Bool]
+    in show(binToInt bools)
+  | head args == "pow" = let
+    a = read (args !! 1) :: Double
+    b = read (args !! 2) :: Integer
+    in show (pow a b)
+  | head args == "fact" = let
+    a = read (args !! 1) :: Integer
+    in show (fact a)
   | head args == "addThem" = let --addThem
     a = read (args !! 1) :: Int
     b = read (args !! 2) :: Int
@@ -26,6 +36,10 @@ handler args
     a = read (args !! 1) :: Int
     b = read (args !! 2) :: Int
     in show (multiplyThem a b )
+  | head args == "divideThem" = let
+    a = read (args !! 1) :: Int
+    b = read (args !! 2) :: Int
+    in show (divideThem a b)
   |head args == "sin" = let
     n = read (args !! 1) :: Double
     m = read (args !! 2) :: Char

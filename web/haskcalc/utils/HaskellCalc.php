@@ -13,6 +13,9 @@ class HaskellCalc
 {
     public static function evalString($parsed, $args = [])
     {
+        // Maybe it's factorial
+        if (strpos($parsed[0], '!') !== false)
+            return self::_normalEval("!", substr($parsed[0], 0, strlen($parsed[0]) - 1));
         // Maybe it's trigonometric
         if (sizeof($parsed) == 1) {
             $parsed = Parser::parseTrigonometric($parsed[0]);
@@ -48,7 +51,7 @@ class HaskellCalc
         return "ERROR";
     }
 
-    private static function _normalEval($operation, $n1, $n2)
+    private static function _normalEval($operation, $n1 = 0, $n2 = 0)
     {
         switch ($operation) {
             case "+":
@@ -58,11 +61,11 @@ class HaskellCalc
             case "x":
                 return self::multiplyThem($n1, $n2);
             case "/":
-                break;
+                return self::divideThem($n1, $n2);
             case "^":
-                break;
+                return self::pow($n1, $n2);
             case "!":
-                break;
+                return self::fact($n1);
         }
     }
 
@@ -79,6 +82,21 @@ class HaskellCalc
     private static function multiplyThem($n1, $n2)
     {
         return self::_eval('multiplyThem', sprintf('%d %d', $n1, $n2));
+    }
+
+    private static function divideThem($n1, $n2)
+    {
+        return self::_eval('divideThem', sprintf('%d %d', $n1, $n2));
+    }
+
+    private static function pow($base, $pow)
+    {
+        return self::_eval('pow', sprintf('%d %d', $base, $pow));
+    }
+
+    private static function fact($n1)
+    {
+        return self::_eval('fact', sprintf('%d', $n1));
     }
 
     public static function cos($value, $mode)
