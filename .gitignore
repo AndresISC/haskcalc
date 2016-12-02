@@ -1,0 +1,5 @@
+.idea
+haskcalc/.stack-work/
+web/composer.lock
+web/haskcalc.exe
+web/vendor/

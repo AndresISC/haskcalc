@@ -23,4 +23,11 @@ class EvaluationController
             'mode' => $mode
         ]);
     }
+
+    public function actionRaw()
+    {
+        $eval = $_POST['directEval'];
+        $mode = $_POST['modo'];
+        return HaskellCalc::rawEval($eval);
+    }
 }

@@ -13,7 +13,11 @@ class Parser
 {
     public static function parseEquation($eqString)
     {
-        $parsing = array_values(array_filter(preg_split('/(\+)|(-)|(\/)|(x)|(\^)/', $eqString, -1, PREG_SPLIT_DELIM_CAPTURE)));
+        $split = preg_split('/(\+)|(-)|(\/)|(x)|(\^)/', $eqString, -1, PREG_SPLIT_DELIM_CAPTURE);
+        $filter = array_filter($split, function ($value){
+            return $value != "";
+        });
+        $parsing = array_values($filter);
         return $parsing;
     }
 

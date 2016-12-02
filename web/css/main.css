@@ -2,7 +2,7 @@
     background-color: #cbcbcb;
     color: #000;
     font-family: 'Fira Mono', monospace;
-    font-size: 6rem;
+    font-size: 4rem;
     text-align: right;
     margin: 0;
     padding: 0;
@@ -31,7 +31,7 @@
 .specials {
     background-color: #2196F3;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 .numerals {

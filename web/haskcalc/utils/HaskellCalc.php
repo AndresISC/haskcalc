@@ -34,6 +34,7 @@ class HaskellCalc
 
     private static function _trigEval($operation, $arg, $mode)
     {
+        $mode = $mode == "deg" ? 'd' : 'r';
         switch ($operation) {
             case "sin":
                 return self::sin($arg, $mode);
@@ -61,7 +62,7 @@ class HaskellCalc
             case "x":
                 return self::multiplyThem($n1, $n2);
             case "/":
-                return self::divideThem($n1, $n2);
+                return $n2 == 0 ? "MathError" : self::divideThem($n1, $n2);
             case "^":
                 return self::pow($n1, $n2);
             case "!":
@@ -101,40 +102,47 @@ class HaskellCalc
 
     public static function cos($value, $mode)
     {
-        return self::_eval('cos', sprintf('%d %s', $value, $mode));
+        return self::_eval('cos', sprintf("%d '%s'", $value, $mode));
     }
 
     public static function sin($value, $mode)
     {
-        return self::_eval('sin', sprintf('%d %s', $value, $mode));
+        return self::_eval('sin', sprintf("%d '%s'", $value, $mode));
     }
 
     public static function tan($value, $mode)
     {
-        return self::_eval('tan', sprintf('%d %s', $value, $mode));
+        return self::_eval('tan', sprintf("%d '%s'", $value, $mode));
     }
 
     public static function ctg($value, $mode)
     {
-        return self::_eval('ctg', sprintf('%d %s', $value, $mode));
+        return self::_eval('ctg', sprintf("%d '%s'", $value, $mode));
     }
 
     public static function sec($value, $mode)
     {
-        return self::_eval('sec', sprintf('%d %s', $value, $mode));
+        return self::_eval('sec', sprintf("%d '%s'", $value, $mode));
     }
 
     public static function csc($value, $mode)
     {
-        return self::_eval('csc', sprintf('%d %s', $value, $mode));
+        return self::_eval('csc', sprintf("%d '%s'", $value, $mode));
     }
 
     private static function _eval($action, $spfstring)
     {
         $result = [];
-        exec('haskcalc ' . $action . ' ' . $spfstring, $result);
+        exec('haskcalc.exe ' . $action . ' ' . $spfstring, $result);
         if (empty($result))
             return "0";
+        return $result[0];
+    }
+
+    public static function rawEval($eval)
+    {
+        $result = [];
+        exec('haskcalc.exe '.$eval, $result);
         return $result[0];
     }
 }

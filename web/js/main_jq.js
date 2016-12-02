@@ -14,7 +14,7 @@ $(document).ready(function () {
 var initCalculator = function () {
     display = $('#calcDisplay');
     defOut = $('#output');
-    operandsRegex = new RegExp(/(\+)|(-)|(\/)|(x)|(!)/);
+    operandsRegex = new RegExp(/(\+)|(\/)|(x)|(!)/);
     specialsRegex = new RegExp(/(sin)|(cos)|(tan)|(sec)|(csc)|(ctg)/);
     var numerals = $('.numerals');
     var actions = $('.actions');

@@ -14,9 +14,6 @@ main = do
 handler :: [String] -> String
 handler args
   | null args = "No parameters given."
-  | head args == "binToInt" = let
-    bools = read (args !! 1) :: [Bool]
-    in show(binToInt bools)
   | head args == "pow" = let
     a = read (args !! 1) :: Double
     b = read (args !! 2) :: Integer
