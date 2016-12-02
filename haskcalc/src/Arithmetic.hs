@@ -2,6 +2,7 @@ module Arithmetic (
   addThem,
   subtractThem,
   multiplyThem,
+  divideThem,
   fact,
   pow
 ) where
@@ -66,7 +67,6 @@ module Arithmetic (
        then binToSignedInt (twoComplement (value result))
        else binToSignedInt(value result)
 
-
   _succesiveAddition :: [Bool] -> Int -> Register -> Register
   _succesiveAddition a n r
     | n == 0 = r
@@ -74,9 +74,31 @@ module Arithmetic (
       add_res = _add a (value r)
       in _succesiveAddition a (n-1) add_res
 
-    {-|
-    Function that adds two binary Strings and returns a 'Register'.
-    -}
+  {-
+  Function that returns the result of dividing dd out of dv.
+  -}
+  divideThem :: Int -> Int -> Int
+  divideThem dd dv
+   | (dd < 0) && (dv < 0) = (_succesiveSubtraction (abs dd) (abs dv) 0)
+   | (dd < 0) || (dv < 0) = (_succesiveSubtraction (abs dd) (abs dv) 0) * (-1)
+   | (dd > 0) || (dv > 0) = _succesiveSubtraction dd dv 0
+   | otherwise = 0
+
+   {-
+    Recursive function to iterate while the dividend is greater than the divisor, subtract the
+    divisor 1 time and increments the quotient in 1 and then calls itself until the dividend
+    is greater than the divisor.
+   -}
+  _succesiveSubtraction :: Int -> Int -> Int -> Int
+  _succesiveSubtraction dd dv cc =
+    if (dd<dv) then 
+      cc 
+    else _succesiveSubtraction (subtractThem dd dv) dv (cc + 1); 
+
+
+  {-|
+  Function that adds two binary Strings and returns a 'Register'.
+  -}
   _add :: [Bool] -> [Bool] -> Register
   _add a b =
     let
